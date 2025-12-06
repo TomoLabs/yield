@@ -1,0 +1,30 @@
+## foundry.toml - UPDATED
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+
+# Enable optimizer
+optimizer = true
+optimizer_runs = 200
+
+# Solidity version
+solc = "0.8.26"
+
+# Uniswap v4 + Periphery + Permit2 + forge-std remappings
+remappings = [
+    # CORRECTED: Removed the final 'src/' to avoid duplicate 'src/src/' pathing.
+    "@uniswap/v4-core/=lib/v4-periphery/lib/v4-core/",
+    "v4-core/=lib/v4-periphery/lib/v4-core/",
+
+    # Periphery and forge-std remain the same.
+    "@uniswap/v4-periphery/=lib/v4-periphery/src/",
+    "v4-periphery/=lib/v4-periphery/src/",
+    "forge-std/=lib/forge-std/src/"
+]
+
+
+# Fix WSL long path issues
+fs_permissions = [
+    { access = "read", path = "./" }
+]
