@@ -354,6 +354,12 @@ TomoYieldHook can optionally route harvested EigenLayer yield into on-chain auto
 8) Hook address validated via Uniswap v4 Hook permissions system
 
 
+## Testing & Validation
+
+- Hook logic tested with Foundry
+- Fee capture and repayment validated on Ethereum mainnet
+- All state transitions are fully on-chain and verifiable via events
+
 
 ## References
 
