@@ -120,3 +120,100 @@ FEATURES:
      2) Heavy operations offloaded to external functions
 
      3) Zero unnecessary storage writes during swap phase
+  
+
+
+USAGE GUIDE:
+
+1. Deploy the Yield Router
+
+    Deploy YieldRouterLRT with:
+
+                 LRT address (ezETH)
+   
+                 Underlying token address (WETH)
+
+
+    This router handles:
+
+      1) Deposits into LRT
+
+      2) Withdrawals
+
+      3) Share previews
+  
+         
+
+2. Deploy TomoYieldHook
+
+   Provide:
+
+      1) Uniswap v4 PoolManager
+
+      2) Underlying token (WETH)
+
+      3) LRT router address
+
+      4) FeeSplitter
+
+      5) Minimum deposit threshold
+  
+         
+
+3. Link FeeSplitter
+   
+                   setFeeSplitter(address splitter)
+
+
+     FeeSplitter allows:
+
+      1) Automated sharing schedules
+
+      2) DAO revenue distribution
+
+      3) LP revenue routing
+  
+         
+
+4. Yield Accumulation
+
+   Swap flow:
+
+                   User Swap → afterSwap() → Fee Accrued → TomoYieldHook Receives Fees
+
+
+   Fees accumulate inside the hook until minDeposit is reached.
+
+  
+
+5. Deposit to LRT
+
+    Triggered via:
+
+                    receiveAndDeposit(token, amount)
+
+
+   Called by:
+
+      1) FeeSplitter
+
+      2) Owner
+
+   Router mints LRT shares → Hook stores share count.
+
+   
+
+6. Harvest Yield
+
+   Owner can harvest restaking rewards:
+
+                   harvestAndDistribute(shares, routeToFeeSplitter, recipient)
+
+
+   Supports:
+
+      1) DAO payouts
+
+      2) Creator income
+
+      3) Auto-compounding cycles
