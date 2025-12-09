@@ -13,7 +13,7 @@ A production-grade Uniswap v4 Hook that converts live swap fees into EigenLayer-
 TomoYieldHook routes Uniswap v4 trading fees directly into EigenLayer LRTs via a programmable Hook and modular YieldRouterLRT adapter. It functions as a fully autonomous, non-custodial yield engine that turns pure DEX trading volume into continuously compounding restaking rewards for DAOs, LPs, creators, and on-chain automation systems.
 
 
-   OVERVIEW
+   ## OVERVIEW
 
 TomoYieldHook is a mainnet-live Uniswap v4 Hook that captures swap fees at the protocol level and reinvests them into EigenLayer LRTs to generate autonomous, compounding yield. This transforms Uniswap liquidity and trading activity into a programmable yield stream that DAOs, LPs, FeeSplitters, and creator economies can route, split, or automate.
 
@@ -123,7 +123,7 @@ CORE PRINCIPLES:
    All deposits, withdrawals, shares, and yield distributions are emitted on-chain for complete auditability.
    
 
-FEATURES:
+## FEATURES
 
 
 1. Hook-Level Fee Capture (Uniswap v4)
@@ -212,7 +212,7 @@ FEATURES:
   
 
 
-USAGE GUIDE:
+## USAGE GUIDE
 
 1. Deploy the Yield Router
 
@@ -309,7 +309,7 @@ USAGE GUIDE:
 
 
 
-ARCHITECTURE: 
+## ARCHITECTURE 
 
 
         ┌──────────── Trader Swap ─────────────┐
