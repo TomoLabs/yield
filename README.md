@@ -32,6 +32,8 @@ Why This Matters for EigenLayer
 
    5) Encourages new on-chain applications that monetize trading activity using restaking rewards.
 
+TomoYieldHook can optionally route harvested EigenLayer yield into on-chain automation systems such as Splitwise-style debt settlement.
+
 
 How the Integration Works
 
