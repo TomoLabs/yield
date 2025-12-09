@@ -363,7 +363,7 @@ TomoYieldHook can optionally route harvested EigenLayer yield into on-chain auto
 - [OpenZeppelin](https://www.openzeppelin.com/)
 
 
-## 🔗 Mainnet Deployment (Ethereum)
+## Mainnet Deployment (Ethereum)
 
 
    TomoYieldHook (Uniswap v4 Yield Automation Hook)
