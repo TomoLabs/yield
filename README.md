@@ -30,7 +30,8 @@ End-to-end yield automation — including fee capture, LRT deposit, share accoun
 
    
 
-Why This Matters for EigenLayer
+### Why This Matters for EigenLayer
+
 
    1) Converts Uniswap trading volume into EigenLayer-secured yield.
 
@@ -45,7 +46,8 @@ Why This Matters for EigenLayer
 TomoYieldHook can optionally route harvested EigenLayer yield into on-chain automation systems such as Splitwise-style debt settlement.
 
 
-How the Integration Works
+### How the Integration Works
+
 
 1. Fee Capture (Uniswap v4 → Hook)
 
