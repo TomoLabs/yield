@@ -100,7 +100,8 @@ EigenLayer Restaking Compatibility:
    5) Plug-and-play support for any adapter-compliant LRT
       
 
-CORE PRINCIPLES: 
+## CORE PRINCIPLES
+ 
 
  1️. Passive Yield Extraction
 
