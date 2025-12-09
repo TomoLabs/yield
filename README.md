@@ -223,7 +223,7 @@ USAGE GUIDE:
 ARCHITECTURE: 
 
 
-                                        ┌──────────── Trader Swap ─────────────┐
+        ┌──────────── Trader Swap ─────────────┐
                             │
                    ┌────────▼────────┐
                    │ Uniswap v4 Pool │
