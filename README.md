@@ -340,3 +340,19 @@ SECURITY MODEL
 - [Uniswap v4 Hooks](https://docs.uniswap.org/contracts/v4/concepts/hooks)
 - [OpenZeppelin](https://www.openzeppelin.com/)
 
+
+🔗 Mainnet Deployment (Ethereum)
+
+   TomoYieldHook (Uniswap v4 Yield Automation Hook)
+   
+         0xeda704f59db7818e16f189b6ac97caf3895ca290
+
+   https://etherscan.io/address/0xeda704f59db7818e16f189b6ac97caf3895ca290
+   
+
+   YieldRouterLRT (EigenLayer LRT Router)
+   
+         0x5bcee69b20ea366c2c0166d3efca13121e07c94b
+
+   https://etherscan.io/address/0x5bcee69b20ea366c2c0166d3efca13121e07c94b
+
