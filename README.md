@@ -1,4 +1,5 @@
-                                        TomoYieldHook
+   # TomoYieldHook
+
 
 
 A production-grade Uniswap v4 Hook that converts live swap fees into EigenLayer-secured, auto-compounding restaking yield using Liquid Restaking Tokens (LRTs).
@@ -335,7 +336,8 @@ ARCHITECTURE:
 
 
 
-SECURITY MODEL
+## SECURITY MODEL
+
 
 1) Hook performs no privileged actions during swap execution
 2) No external tokens can be drained — only pool-provided fees are used
@@ -348,7 +350,8 @@ SECURITY MODEL
 
 
 
-### References
+## References
+
 
 - [EigenLayer](https://app.eigenlayer.xyz/)
 - [Uniswap v4 Hooks](https://docs.uniswap.org/contracts/v4/concepts/hooks)
