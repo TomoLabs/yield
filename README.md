@@ -21,7 +21,8 @@ End-to-end yield automation — including fee capture, LRT deposit, share accoun
 
       ✨ Live on Ethereum • Powered by Uniswap v4 Hooks • EigenLayer Restaking Integrated
 
-EigenLayer Integration:
+## EigenLayer Integration
+
 
    TomoYieldHook is natively integrated with the EigenLayer restaking ecosystem, enabling Uniswap v4 swap fees to be converted into Liquid Restaking Tokens (LRTs) such as      ezETH, rsETH, or METH. This transforms ordinary DEX trading volume into a restaked yield engine that compounds automatically and can be programmatically routed to DAOs,     LPs, creators, protocol treasuries, or Splitwise-style automation modules.
 
