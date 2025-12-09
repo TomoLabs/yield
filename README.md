@@ -30,7 +30,7 @@ End-to-end yield automation — including fee capture, LRT deposit, share accoun
 
    
 
-### Why This Matters for EigenLayer
+### Why This Matters for EigenLayer:
 
 
    1) Converts Uniswap trading volume into EigenLayer-secured yield.
@@ -46,7 +46,7 @@ End-to-end yield automation — including fee capture, LRT deposit, share accoun
 TomoYieldHook can optionally route harvested EigenLayer yield into on-chain automation systems such as Splitwise-style debt settlement.
 
 
-### How the Integration Works
+### How the Integration Works:
 
 
 1. Fee Capture (Uniswap v4 → Hook)
@@ -88,7 +88,7 @@ TomoYieldHook can optionally route harvested EigenLayer yield into on-chain auto
       All restaking deposits, withdrawals, and share balances are fully on-chain and event-driven.
 
 
-### EigenLayer Restaking Compatibility
+### EigenLayer Restaking Compatibility:
 
 
   TomoYieldHook is designed to operate seamlessly with EigenLayer Liquid Restaking Tokens (LRTs) to convert swap fees into compounding yield. Supported capabilities           include:
