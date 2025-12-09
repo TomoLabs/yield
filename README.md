@@ -9,6 +9,82 @@ TomoYieldHook is a mainnet-live Uniswap v4 Hook that captures swap fees at the p
 End-to-end yield automation — including fee capture, LRT deposit, share accounting, yield harvesting, and distribution — is implemented entirely on-chain and validated across local, testnet, and Ethereum mainnet environments.
 
       ✨ Live on Ethereum • Powered by Uniswap v4 Hooks • EigenLayer Restaking Integrated
+
+EigenLayer Integration:
+
+   TomoYieldHook is natively integrated with the EigenLayer restaking ecosystem, enabling Uniswap v4 swap fees to be converted into Liquid Restaking Tokens (LRTs) such as      ezETH, rsETH, or METH. This transforms ordinary DEX trading volume into a restaked yield engine that compounds automatically and can be programmatically routed to DAOs,     LPs, creators, protocol treasuries, or Splitwise-style automation modules.
+
+   This integration demonstrates how EigenLayer + Uniswap v4 Hooks unlock a new DeFi design space where liquidity, trading activity, and restaking yield become a unified       stream of programmable value. TomoYieldHook illustrates how restaking can be embedded natively inside AMM flows, creating a fully autonomous “yield layer” on top of         liquidity provisioning — a core theme for the EigenLayer x Uniswap v4 Hook Incubator.
+
+   
+
+Why This Matters for EigenLayer
+
+   1) Converts Uniswap trading volume into EigenLayer-secured yield.
+
+   2) Generates continuous LRT deposits without user interaction.
+
+   3) Demonstrates a novel use case: Restaking as a Hook Primitive.
+
+   4) Proves LRTs can serve as programmable yield routers for Web3 economies.
+
+   5) Encourages new on-chain applications that monetize trading activity using restaking rewards.
+
+
+How the Integration Works
+
+1. Fee Capture (Uniswap v4 → Hook)
+
+    afterSwap() extracts swap fees from the pool manager.
+   
+
+2. YieldRouterLRT Conversion
+
+    Fees are passed into the YieldRouterLRT adapter, which:
+
+      1) Approves the LRT contract
+
+      2) Deposits underlying (e.g., WETH → ezETH)
+
+      3) Returns newly minted LRT shares
+         
+
+3. Restaking Yield Accrual (EigenLayer)
+
+     These shares continuously earn EigenLayer rewards without further interaction.
+
+
+4. Automated Yield Distribution
+
+     When harvested:
+
+      1) Yield can be routed to FeeSplitters
+
+      2) Paid out to DAO treasuries
+
+      3) Sent to LPs
+
+      4) Or used to settle debts (e.g., Splitwise Hook integration)
+  
+        
+5. Full Transparency
+
+      All restaking deposits, withdrawals, and share balances are fully on-chain and event-driven.
+
+
+EigenLayer Restaking Compatibility:
+
+  TomoYieldHook is designed to operate seamlessly with EigenLayer Liquid Restaking Tokens (LRTs) to convert swap fees into compounding yield. Supported capabilities           include:
+
+   1) Automated WETH → LRT conversion
+
+   2) Share-based accounting for restaked positions
+
+   3) Native EigenLayer reward accrual through LRT mechanisms
+
+   4) Programmable yield withdrawals and routing
+
+   5) Plug-and-play support for any adapter-compliant LRT
       
 
 CORE PRINCIPLES: 
@@ -256,3 +332,11 @@ SECURITY MODEL
 5) Emergency withdrawal limited to owner and only for underlying token
 6) No reentrancy vectors in core logic
 7) No dependence on external off-chain systems
+
+
+### References
+
+- [EigenLayer](https://app.eigenlayer.xyz/)
+- [Uniswap v4 Hooks](https://docs.uniswap.org/contracts/v4/concepts/hooks)
+- [OpenZeppelin](https://www.openzeppelin.com/)
+
