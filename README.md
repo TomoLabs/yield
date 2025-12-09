@@ -28,7 +28,7 @@ Why This Matters for EigenLayer
 
    3) Demonstrates a novel use case: Restaking as a Hook Primitive.
 
-   4) Proves LRTs can serve as programmable yield routers for Web3 economies.
+   4) Proves LRTs can act as programmable, composable yield routers directly inside AMM execution.
 
    5) Encourages new on-chain applications that monetize trading activity using restaking rewards.
 
