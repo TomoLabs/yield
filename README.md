@@ -9,3 +9,26 @@ TomoYieldHook is a mainnet-live Uniswap v4 Hook that captures swap fees at the p
 End-to-end yield automation — including fee capture, LRT deposit, share accounting, yield harvesting, and distribution — is implemented entirely on-chain and validated across local, testnet, and Ethereum mainnet environments.
 
       ✨ Live on Ethereum • Powered by Uniswap v4 Hooks • EigenLayer Restaking Integrated
+      
+
+CORE PRINCIPLES: 
+
+ 1️. Passive Yield Extraction
+
+   Trading activity in Uniswap v4 automatically generates yield; no user approvals or active management required.
+
+ 2️. Composable Hook-Powered Automation
+
+   Yield routing is performed entirely by a v4 hook (afterSwap), enabling seamless programmability inside AMM flow.
+
+ 3️. Modular Restaking Architecture
+
+   The YieldRouterLRT adapter abstracts LRT interactions, enabling plug-and-play support for any EigenLayer-compatible LRT.
+
+ 4️. Permissioned Yet Non-Custodial
+
+   Only the configured FeeSplitter and owner can trigger yield operations — but funds remain entirely non-custodial, without pooled user deposits.
+
+ 5️. Transparent & Verifiable
+
+   All deposits, withdrawals, shares, and yield distributions are emitted on-chain for complete auditability.
