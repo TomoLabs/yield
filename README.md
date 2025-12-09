@@ -32,3 +32,91 @@ CORE PRINCIPLES:
  5️. Transparent & Verifiable
 
    All deposits, withdrawals, shares, and yield distributions are emitted on-chain for complete auditability.
+   
+
+FEATURES:
+
+
+1. Hook-Level Fee Capture (Uniswap v4)
+
+   1) Runs in afterSwap
+
+   2) Detects fee deltas for token0 / token1
+
+   3) Aggregates yield internally
+
+   4) Does not modify swap execution path (gas-optimized)
+      
+
+2. Automated LRT Deposits
+
+ Using the YieldRouterLRT adapter, TomoYieldHook:
+
+  1) Approves LRT router
+
+  2) Deposits underlying (e.g., WETH → ezETH)
+
+  3) Tracks shares received
+
+  4) Enforces minimum deposit threshold (minDeposit) to prevent dust deposits
+
+     
+
+3. Yield Harvesting & Distribution
+
+   Harvests accumulated LRT yield via:
+
+                 harvestAndDistribute(sharesToWithdraw, routeToFeeSplitter, fallbackRecipient)
+
+
+   Supports:
+
+     1) FeeSplitter distribution (DAO multisig, LP splitters, creator payouts)
+
+     2) Direct owner payouts
+
+     3) Configurable routing logic
+        
+
+4. Full Restaking Compatibility
+
+    Works with any LRT supporting:
+
+               deposit(amount)
+   
+               withdraw(shares)
+   
+               previewWithdraw(shares)
+
+
+    Examples:
+
+      1) ezETH
+
+      2) rsETH
+
+      3) METH
+
+      4) Renzo LRT
+
+      5) Swell LRT
+         
+
+5. Role-Safe Security Model
+
+     1) onlyOwner for all sensitive actions
+
+     2) FeeSplitter restricted for inbound yield
+
+     3) No pool funds are ever held in custody
+
+     4) Hook cannot remove LP or trader funds — only fees provided by the pool manager
+        
+
+6. Gas-Optimized Runtime
+
+     1) Minimal logic inside afterSwap
+
+     2) Heavy operations offloaded to external functions
+
+     3) Zero unnecessary storage writes during swap phase
