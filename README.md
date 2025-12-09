@@ -2,6 +2,15 @@
   A production-grade Uniswap v4 Hook that converts live swap fees into EigenLayer-secured restaking yield using LRTs.
 
 
+
+TomoYieldHook converts Uniswap v4 swap fees into auto-compounding restaking yield via EigenLayer LRTs.
+
+  1) Status: Live on Ethereum Mainnet  
+  2) Contracts Verified on Etherscan  
+  3) End-to-End Yield Flow Operational  
+  4) Production-Grade Hook Architecture
+
+
 TomoYieldHook converts Uniswap v4 swap fees into auto-compounding restaking yield by routing earned fees directly into Liquid Restaking Token (LRT) protocols via a programmable Uniswap v4 Hook and a modular YieldRouterLRT adapter. It functions as a fully autonomous, non-custodial yield engine that turns DEX trading volume into passive EigenLayer restaking rewards.
 
    OVERVIEW
