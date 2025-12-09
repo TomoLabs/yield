@@ -217,3 +217,30 @@ USAGE GUIDE:
       2) Creator income
 
       3) Auto-compounding cycles
+
+
+
+ARCHITECTURE: 
+
+
+                                        ┌──────────── Trader Swap ─────────────┐
+                            │
+                   ┌────────▼────────┐
+                   │ Uniswap v4 Pool │
+                   └────────┬────────┘
+                            │ afterSwap()
+                   ┌────────▼────────┐
+                   │ TomoYieldHook   │  ◄─ Fee accumulation
+                   └────────┬────────┘
+                            │
+                 ┌──────────▼──────────┐
+                 │ YieldRouterLRT      │  ◄─ LRT deposit logic
+                 └──────────┬──────────┘
+                            │
+                 ┌──────────▼──────────┐
+                 │ EigenLayer LRT      │  ◄─ ezETH / rsETH etc.
+                 └──────────┬──────────┘
+                            │
+                 ┌──────────▼──────────┐
+                 │ FeeSplitter / DAO   │  ◄─ Automated distribution
+                 └─────────────────────┘
