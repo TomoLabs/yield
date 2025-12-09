@@ -244,3 +244,15 @@ ARCHITECTURE:
                  ┌──────────▼──────────┐
                  │ FeeSplitter / DAO   │  ◄─ Automated distribution
                  └─────────────────────┘
+
+
+
+SECURITY MODEL
+
+1) Hook performs no privileged actions during swap execution
+2) No external tokens can be drained — only pool-provided fees are used
+3) Only owner + FeeSplitter can initiate routing
+4) LRT deposits/withdrawals validated with try/catch
+5) Emergency withdrawal limited to owner and only for underlying token
+6) No reentrancy vectors in core logic
+7) No dependence on external off-chain systems
