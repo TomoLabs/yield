@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
 
-// Define all shared interfaces here once.
+
 
 interface IERC20 {
     function transfer(address to, uint256 value) external returns (bool);
@@ -19,4 +19,5 @@ interface ILRT {
     function deposit(uint256 amount) external returns (uint256);
     function withdraw(uint256 shares) external returns (uint256);
     function previewWithdraw(uint256 shares) external view returns (uint256);
+
 }
