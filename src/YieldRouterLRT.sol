@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
 
-// FIX: Import the shared interfaces file to resolve "Identifier already declared" errors (2333)
+
 import "./interfaces/ITomo.sol"; 
-// Note: This file must contain the definitions for IERC20 and ILRT.
+
 
 contract YieldRouterLRT {
-    // Note: IERC20 and ILRT interface definitions were removed here to prevent conflicts.
+  
     
     address public immutable lrt;         // LRT contract (ezETH)
-    address public immutable token;       // underlying ERC20 (e.g., WETH) - or 0 for native ETH (requires changes)
+    address public immutable token;       
     address public owner;
 
     event DepositedToLRT(address indexed from, uint256 amount, uint256 shares);
@@ -28,8 +28,7 @@ contract YieldRouterLRT {
         owner = msg.sender;
     }
 
-    /// @notice deposit `amount` of underlying token into LRT and return shares
-    /// Caller must ensure this contract has `amount` tokens (transfer first).
+    
     function depositToLRT(uint256 amount) public onlyOwner returns (uint256) {
         require(amount > 0, "zero");
         // approve LRT using the imported IERC20 interface
@@ -42,7 +41,7 @@ contract YieldRouterLRT {
         return shares;
     }
 
-    /// @notice withdraw given shares from LRT, returns withdrawn underlying amount
+    
     function withdrawFromLRT(uint256 shares) public onlyOwner returns (uint256) {
         require(shares > 0, "zero");
         // call LRT.withdraw(shares) using the imported ILRT interface
