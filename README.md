@@ -21,6 +21,14 @@ End-to-end yield automation — including fee capture, LRT deposit, share accoun
 
       ✨ Live on Ethereum • Powered by Uniswap v4 Hooks • EigenLayer Restaking Integrated
 
+
+  ## Demo Video
+
+🎥 Demo & Technical Walkthrough:
+
+https://youtu.be/7yRWFemne-4?si=oOeoj13KnzU92JGq
+
+
 ## EigenLayer Integration
 
 
