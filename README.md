@@ -389,6 +389,13 @@ Install Foundry:
 - All state transitions are fully on-chain and verifiable via events
 
 
+## Partner Integrations
+
+- **EigenLayer** – Used for Liquid Restaking Token (LRT) yield via ezETH / rsETH
+- **Uniswap v4 Hooks** – afterSwap-based protocol-level fee capture
+
+
+
 ## References
 
 
