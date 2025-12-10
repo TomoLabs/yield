@@ -31,7 +31,7 @@ https://youtu.be/7yRWFemne-4?si=oOeoj13KnzU92JGq
 
 ## Hookathon Work
 
-All Uniswap v4 Hook logic, EigenLayer LRT routing, YieldRouterLRT adapter, and the Foundry test suite for TomoYieldHook were built during the Hookathon. The project introduces a new Hook-powered restaking yield primitive that converts swap fees into auto-compounding EigenLayer-secured yield, with the full on-chain flow implemented and validated through local testing and Ethereum mainnet deployment.
+All Uniswap v4 Hook logic, EigenLayer LRT routing, the YieldRouterLRT adapter, and the full Foundry test suite for TomoYieldHook were designed and implemented during the Hookathon period.The project introduces a new Hook-powered restaking yield primitive that converts swap fees into auto-compounding EigenLayer-secured yield, with the full on-chain flow implemented and validated through local testing and Ethereum mainnet deployment.
 
 
 ## EigenLayer Integration
