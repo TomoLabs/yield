@@ -325,6 +325,21 @@ TomoYieldHook can optionally route harvested EigenLayer yield into on-chain auto
 
       3) Auto-compounding cycles
 
+  
+
+## Running Tests
+
+This project uses Foundry for testing.
+
+Install Foundry:
+
+
+              curl -L https://foundry.paradigm.xyz | bash
+              foundryup
+
+              forge test -vvvv
+              
+
 
 
 ## ARCHITECTURE 
