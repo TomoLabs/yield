@@ -2,29 +2,21 @@
 pragma solidity ^0.8.26;
 
 import "forge-std/Test.sol";
-// NOTE: We do NOT import the real TomoYieldHook here because BaseHook enforces
-// Uniswap v4 permission-bit address validation that is extremely brittle in unit tests.
-// Instead, we deploy a local TestTomoYieldHook that contains the SAME yield logic
-// but without inheriting BaseHook. This is an industry-standard approach for
-// isolating and testing protocol business logic.
 import "../src/YieldRouterLRT.sol";
 import "../src/interfaces/ITomo.sol";
 
-// ------------------------------------------------------------
+
 // Mock PoolManager (bypasses HookAddressNotValid)
-// ------------------------------------------------------------
-// NOTE: We intentionally DO NOT inherit IPoolManager here.
-// We only need the single function used by BaseHook during construction.
-// If we inherit the full interface, Solidity forces us to implement ~20+ functions.
+
 contract MockPoolManager {
     function isHookAddressValid(address) external pure returns (bool) {
         return true; // <-- this fixes your test failure
     }
 }
 
-// ------------------------------------------------------------
+
 // Mock ERC20
-// ------------------------------------------------------------
+
 contract MockERC20 is IERC20 {
     string public name = "Mock";
     string public symbol = "MOCK";
@@ -62,9 +54,9 @@ contract MockERC20 is IERC20 {
     }
 }
 
-// ------------------------------------------------------------
+
 // Mock LRT
-// ------------------------------------------------------------
+
 contract MockLRT is ILRT {
     MockERC20 public token;
     uint256 public totalShares;
@@ -92,12 +84,11 @@ contract MockLRT is ILRT {
     }
 }
 
-// ------------------------------------------------------------
+
 // Mock FeeSplitter
-// ------------------------------------------------------------
-// ------------------------------------------------------------
+
 // Test-Only Standalone Yield Hook (NO BaseHook)
-// ------------------------------------------------------------
+
 contract TestTomoYieldHook {
     address public owner;
     address public immutable UNDERLYING_TOKEN;
@@ -119,7 +110,7 @@ contract TestTomoYieldHook {
         owner = msg.sender;
     }
 
-    // ✅ FIXED: Now correctly routes through YieldRouterLRT
+    //  routes through YieldRouterLRT
     function receiveAndDeposit(address token, uint256 amount) external returns (bool) {
         require(msg.sender == feeSplitterAddress, "not authorized");
         require(token == UNDERLYING_TOKEN, "unexpected token");
@@ -129,23 +120,23 @@ contract TestTomoYieldHook {
         require(bal >= amount, "insufficient balance");
         if (amount < minDeposit) return false;
 
-        // ✅ transfer funds to router first
+        // transfer funds to router first
         require(IERC20(token).transfer(lrtRouter, amount), "router transfer failed");
 
-        // ✅ call correct router function
+        // call correct router function
         uint256 shares = YieldRouterLRT(lrtRouter).depositToLRT(amount);
         lrtShares += shares;
         return true;
     }
 
-    // ✅ FIXED: Now correctly withdraws via router
+    // withdraws via router
     function harvestAndDistribute(uint256 sharesToWithdraw, bool routeToFeeSplitter, address recipientIfNotSplitter) external onlyOwner {
         require(sharesToWithdraw > 0, "zero");
         require(sharesToWithdraw <= lrtShares, "insufficient shares");
 
         uint256 withdrawn = YieldRouterLRT(lrtRouter).withdrawFromLRT(sharesToWithdraw);
 
-        // ✅ TEST-ONLY: Simulate receipt of withdrawn tokens from router
+        // TEST-ONLY: Simulate receipt of withdrawn tokens from router
         // (Router mock does not automatically transfer to hook in tests)
         MockERC20(UNDERLYING_TOKEN).mint(address(this), withdrawn);
         lrtShares -= sharesToWithdraw;
@@ -170,9 +161,9 @@ contract MockFeeSplitter is IFeeSplitter {
     }
 }
 
-// ------------------------------------------------------------
+
 // Tomo Yield System Tests
-// ------------------------------------------------------------
+
 contract YieldSystemTest is Test {
     // We must deploy the hook at a VALID hook address using CREATE2
     // Uniswap v4 enforces permission bits in the hook contract address itself.
@@ -200,9 +191,9 @@ contract YieldSystemTest is Test {
         router.setOwner(address(hook));(address(hook));
     }
 
-    // ------------------------------------------------------------
+    
     // receiveAndDeposit
-    // ------------------------------------------------------------
+    
 
     function testReceiveAndDepositAboveThreshold() public {
         token.mint(address(hook), 100 ether);
@@ -231,9 +222,9 @@ contract YieldSystemTest is Test {
         hook.receiveAndDeposit(address(token), 50 ether);
     }
 
-    // ------------------------------------------------------------
+    
     // harvestAndDistribute
-    // ------------------------------------------------------------
+    
 
     function testHarvestToFeeSplitter() public {
         token.mint(address(hook), 100 ether);
@@ -258,9 +249,9 @@ contract YieldSystemTest is Test {
         assertEq(token.balanceOf(user), 40 ether);
     }
 
-    // ------------------------------------------------------------
+    
     // emergencyWithdraw
-    // ------------------------------------------------------------
+    
 
     function testEmergencyWithdraw() public {
         token.mint(address(hook), 25 ether);
@@ -270,9 +261,9 @@ contract YieldSystemTest is Test {
         assertEq(token.balanceOf(address(this)), 25 ether);
     }
 
-    // ------------------------------------------------------------
+    
     // Router Direct Tests
-    // ------------------------------------------------------------
+    
 
     function testRouterDepositAndWithdraw() public {
         token.mint(address(router), 100 ether);
@@ -293,3 +284,4 @@ contract YieldSystemTest is Test {
         assertEq(preview, 10 ether);
     }
 }
+
