@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
 
-// FIX: Add the import for the shared interfaces to resolve Undeclared identifier errors (7576)
+
 import "./interfaces/ITomo.sol"; 
 
 import {BaseHook} from "v4-periphery/utils/BaseHook.sol";
@@ -12,21 +12,16 @@ import {BalanceDelta} from "@uniswap/v4-core/src/types/BalanceDelta.sol";
 import {SwapParams} from "@uniswap/v4-core/src/types/PoolOperation.sol";
 
 
-/**
- * @title TomoYieldHook
- * @notice After-swap hook (afterSwap) + yield manager entrypoint.
- * - This hook deposits received yield into an LRT via the router.
- */
+
 contract TomoYieldHook is BaseHook {
     
     // --- State Variables ---
     address public owner;
 
-    // The underlying token we accept for deposits (e.g., WETH)
-    // FIX: Changed to SCREAMING_SNAKE_CASE for immutable variable
+    
     address public immutable UNDERLYING_TOKEN;
 
-    // optional FeeSplitter address (used as address type to avoid conflict on IFeeSplitter type)
+    // FeeSplitter address (used as address type to avoid conflict on IFeeSplitter type)
     address public feeSplitterAddress;
 
     // LRT adapter address (YieldRouterLRT)
@@ -46,7 +41,7 @@ contract TomoYieldHook is BaseHook {
     event OwnerChanged(address oldOwner, address newOwner);
     event MinDepositUpdated(uint256 newMin);
 
-    // FIX: Refactored logic into internal function for gas optimization
+    // Refactored logic into internal function for gas optimization
     function _onlyOwner() internal view {
         require(msg.sender == owner, "not owner");
     }
@@ -59,8 +54,7 @@ contract TomoYieldHook is BaseHook {
     constructor(IPoolManager _poolManager, address _underlyingToken, address _lrtRouter, address _feeSplitter, uint256 _minDeposit)
         BaseHook(_poolManager)
     {
-        // NOTE: The self-validation check for HookAddressValid is typically removed here to allow standard deployment
-        // If it was present: require(_poolManager.isHookAddressValid(address(this)), "HookAddressNotValid"); 
+        
         
         require(_underlyingToken != address(0), "zero token");
         require(_lrtRouter != address(0), "zero router");
@@ -92,10 +86,7 @@ contract TomoYieldHook is BaseHook {
         });
     }
 
-    /**
-     * @notice Passive on-swap. This hook intentionally does very little on-swap to reduce gas.
-     * FIX: Added pure mutability
-     */
+    
     function _afterSwap(
         address, // caller
         PoolKey calldata, // key
@@ -110,9 +101,9 @@ contract TomoYieldHook is BaseHook {
         return (BaseHook.afterSwap.selector, 0);
     }
 
-    // ------------------------------------------------------------------------------------
+    
     // External entrypoint for FeeSplitter (or other sender) to deposit tokens and deposit to LRT
-    // ------------------------------------------------------------------------------------
+    
     function receiveAndDeposit(address token, uint256 amount) external returns (bool) {
         // allow only the configured feeSplitter or owner to call this
         require(msg.sender == feeSplitterAddress || msg.sender == owner, "not authorized");
@@ -130,8 +121,7 @@ contract TomoYieldHook is BaseHook {
             return false;
         }
 
-        // Approve the LRT adapter to pull tokens
-        // FIX: Added require check for unchecked ERC20 transfer/approve
+        
         require(IERC20(token).approve(lrtRouter, amount), "TH: approve failed");
 
         // Call router deposit using the imported ILRT interface
@@ -145,7 +135,7 @@ contract TomoYieldHook is BaseHook {
         }
     }
 
-    /// @notice Harvest: withdraw some shares and either send underlying to feeSplitter for distribution or to owner
+    
     function harvestAndDistribute(uint256 sharesToWithdraw, bool routeToFeeSplitter, address recipientIfNotSplitter) external onlyOwner {
         require(sharesToWithdraw > 0, "zero");
         require(sharesToWithdraw <= lrtShares, "insufficient shares");
@@ -158,23 +148,18 @@ contract TomoYieldHook is BaseHook {
 
         // route the withdrawn tokens
         if (routeToFeeSplitter && feeSplitterAddress != address(0)) {
-            // send underlying to feeSplitter and instruct it to distribute
-            // FIX: Added require check for unchecked ERC20 approve
-            require(IERC20(UNDERLYING_TOKEN).approve(feeSplitterAddress, withdrawn), "TH: approve splitter failed"); // FIX: Used new immutable name
+            require(IERC20(UNDERLYING_TOKEN).approve(feeSplitterAddress, withdrawn), "TH: approve splitter failed"); 
             
             // Call distribute using the imported IFeeSplitter interface
-            try IFeeSplitter(feeSplitterAddress).distribute(UNDERLYING_TOKEN, withdrawn) { // FIX: Used new immutable name
+            try IFeeSplitter(feeSplitterAddress).distribute(UNDERLYING_TOKEN, withdrawn) { 
                 // distributed
             } catch {
-                // if distribute fails, transfer to owner
-                // FIX: Added require check for unchecked ERC20 transfer
-                require(IERC20(UNDERLYING_TOKEN).transfer(owner, withdrawn), "TH: transfer owner failed"); // FIX: Used new immutable name
+                require(IERC20(UNDERLYING_TOKEN).transfer(owner, withdrawn), "TH: transfer owner failed"); 
             }
         } else {
             // direct transfer to recipient
             address dest = recipientIfNotSplitter == address(0) ? owner : recipientIfNotSplitter;
-            // FIX: Added require check for unchecked ERC20 transfer
-            require(IERC20(UNDERLYING_TOKEN).transfer(dest, withdrawn), "TH: transfer dest failed"); // FIX: Used new immutable name
+            require(IERC20(UNDERLYING_TOKEN).transfer(dest, withdrawn), "TH: transfer dest failed"); 
         }
     }
 
@@ -186,7 +171,6 @@ contract TomoYieldHook is BaseHook {
 
     function setLrtRouter(address _router) external onlyOwner {
         require(_router != address(0), "zero");
-        // careful: resetting accounting if you want to migrate must be handled
         lrtShares = 0; 
         lrtRouter = _router;
     }
@@ -204,7 +188,7 @@ contract TomoYieldHook is BaseHook {
 
     // emergency withdraw underlying from this contract to owner
     function emergencyWithdraw(uint256 amount) external onlyOwner {
-        // FIX: Added require check for unchecked ERC20 transfer
-        require(IERC20(UNDERLYING_TOKEN).transfer(owner, amount), "TH: emergency failed"); // FIX: Used new immutable name
+        require(IERC20(UNDERLYING_TOKEN).transfer(owner, amount), "TH: emergency failed");
     }
+
 }
