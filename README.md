@@ -385,7 +385,7 @@ Install Foundry:
 ## Testing & Validation
 
 - Hook logic tested with Foundry
-- Fee capture and repayment validated on Ethereum mainnet
+- Fee capture, LRT deposits, and yield routing validated on Ethereum mainnet
 - All state transitions are fully on-chain and verifiable via events
 
 
