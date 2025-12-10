@@ -17,8 +17,7 @@ contract DeployTomoYield is Script {
         address feeSplitter = vm.envAddress("FEE_SPLITTER"); 
         uint256 minDeposit = vm.envUint("MIN_DEPOSIT");      
         
-        // Removed: uint256 deployerKey = vm.envUint("PRIVATE_KEY"); 
-        // We use vm.startBroadcast() without arguments, relying on the CLI --private-key flag
+        
 
         // Start broadcasting deployment transactions
         vm.startBroadcast(); 
@@ -36,11 +35,6 @@ contract DeployTomoYield is Script {
             minDeposit
         );
         console.log("TomoYieldHook deployed at:", address(hook));
-
-        // Note: Recommended action: Set the hook as the router's owner immediately after deployment
-        // router.setOwner(address(hook));
-        // console.log("Router ownership transferred to hook:", address(hook));
-
 
         vm.stopBroadcast();
     }
