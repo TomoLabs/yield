@@ -3,7 +3,7 @@ pragma solidity ^0.8.26;
 
 import "forge-std/Script.sol";
 
-// Correct imports for your installed v4-core version
+
 import {IPoolManager} from "v4-core/src/interfaces/IPoolManager.sol";
 import {PoolKey} from "v4-core/src/types/PoolKey.sol";
 import {IHooks} from "v4-core/src/interfaces/IHooks.sol";
@@ -37,3 +37,4 @@ contract CreatePool is Script {
         console.log("POOL CREATED with hook:", hook);
     }
 }
+
